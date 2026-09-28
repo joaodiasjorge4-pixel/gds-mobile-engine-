@@ -1,0 +1,702 @@
+GAME DEV STUDIO MOBILE
+
+CENTRAL DE INTEGRAÇÃO GITHUB AUTOMÁTICA
+
+OBJETIVO
+
+Criar dentro do aplicativo Game Dev Studio Mobile um sistema chamado:
+
+CENTRAL DE INTEGRAÇÃO
+
+Esse sistema deve permitir que o usuário conecte um projeto do GitHub diretamente pela interface do aplicativo, através de uma barra de comando/endereço.
+
+Depois que o usuário informar o repositório, o sistema deve analisar, validar e preparar automaticamente a integração entre:
+
+GAME DEV STUDIO
+        ↕
+CENTRAL DE INTEGRAÇÃO
+        ↕
+GITHUB
+        ↕
+GITHUB ACTIONS
+        ↕
+BUILD REMOTO
+        ↕
+APK / AAB
+
+---
+
+1. INTERFACE
+
+Adicionar ao aplicativo uma seção:
+
+MENU → INTEGRAÇÃO → GITHUB
+
+Criar uma interface simples e profissional.
+
+Barra principal
+
+Adicionar:
+
+┌──────────────────────────────────────────────┐
+│ 🔗 URL DO REPOSITÓRIO GITHUB                 │
+│                                              │
+│ https://github.com/usuario/repositorio       │
+└──────────────────────────────────────────────┘
+
+[ CONECTAR GITHUB ]
+
+A barra deve aceitar:
+
+URL HTTPS
+
+https://github.com/usuario/repositorio
+
+URL terminada em .git
+
+https://github.com/usuario/repositorio.git
+
+Nome do repositório
+
+usuario/repositorio
+
+O sistema deve normalizar automaticamente os formatos.
+
+---
+
+2. EXEMPLO
+
+O usuário pode colocar:
+
+https://github.com/joaodiasjorge4-pixel/gds-mobile-engine-
+
+ou:
+
+https://github.com/joaodiasjorge4-pixel/gds-mobile-engine-.git
+
+O sistema deve identificar automaticamente:
+
+Owner:
+joaodiasjorge4-pixel
+
+Repository:
+gds-mobile-engine-
+
+Branch:
+main
+
+---
+
+3. BOTÃO CONECTAR
+
+Quando o usuário tocar:
+
+CONECTAR GITHUB
+
+executar automaticamente:
+
+VALIDAR URL
+↓
+IDENTIFICAR USUÁRIO
+↓
+IDENTIFICAR REPOSITÓRIO
+↓
+VERIFICAR ACESSO
+↓
+VERIFICAR PERMISSÕES
+↓
+VERIFICAR BRANCH
+↓
+VERIFICAR ESTRUTURA
+↓
+VERIFICAR GITHUB ACTIONS
+↓
+VERIFICAR WORKFLOWS
+↓
+CONECTAR
+
+Não considerar a conexão concluída apenas porque a URL é válida.
+
+---
+
+4. AUTENTICAÇÃO SEGURA
+
+Nunca pedir ao usuário:
+
+- senha do GitHub;
+- senha pessoal;
+- chave privada;
+- segredo diretamente na barra.
+
+Utilizar autenticação oficial do GitHub/OAuth ou fluxo autorizado equivalente.
+
+Quando autenticação for necessária:
+
+CONECTAR GITHUB
+↓
+AUTORIZAÇÃO OFICIAL
+↓
+RETORNO AO GAME DEV STUDIO
+↓
+CONEXÃO ESTABELECIDA
+
+Nunca armazenar credenciais sensíveis em texto puro.
+
+---
+
+5. PERMISSÕES
+
+Depois da autenticação, verificar automaticamente:
+
+Repository Contents
+
+Read
+Write
+
+Actions
+
+Permitir o necessário para:
+
+consultar workflows
+executar workflows
+consultar jobs
+consultar logs
+consultar artefatos
+
+Git
+
+Permitir:
+
+branches
+commits
+arquivos
+histórico
+
+Se faltar uma permissão:
+
+PERMISSÃO INCOMPLETA
+
+mostrar:
+
+[ CORRIGIR AUTORIZAÇÃO ]
+
+O botão deve abrir o fluxo oficial de autorização.
+
+Nunca tentar burlar permissões do GitHub.
+
+---
+
+6. PAINEL DE CONEXÃO
+
+Depois da conexão, mostrar:
+
+╔══════════════════════════════════╗
+║       GITHUB CONECTADO            ║
+╠══════════════════════════════════╣
+║ Usuário: joaodiasjorge4-pixel    ║
+║ Repositório: gds-mobile-engine-   ║
+║ Branch: main                     ║
+║ Contents: ✓                      ║
+║ Actions: ✓                       ║
+║ Status: ONLINE                   ║
+╚══════════════════════════════════╝
+
+---
+
+7. SINCRONIZAÇÃO AUTOMÁTICA
+
+Adicionar:
+
+[ SINCRONIZAR PROJETO ]
+
+Ao executar:
+
+Game Dev Studio
+↓
+Comparar arquivos locais
+↓
+Comparar GitHub
+↓
+Detectar diferenças
+↓
+Classificar alterações
+↓
+Sincronizar
+
+Classificar:
+
+NOVO
+MODIFICADO
+REMOVIDO
+IGUAL
+CONFLITO
+
+---
+
+8. PROTEÇÃO CONTRA PERDA
+
+Nunca apagar automaticamente arquivos importantes.
+
+Antes de uma alteração grande:
+
+CRIAR PONTO DE RESTAURAÇÃO
+↓
+SINCRONIZAR
+
+Se houver conflito:
+
+CONFLITO DETECTADO
+
+Mostrar:
+
+[ USAR LOCAL ]
+[ USAR GITHUB ]
+[ MESCLAR ]
+[ CANCELAR ]
+
+---
+
+9. AUTOMAÇÃO COMPLETA
+
+Depois que o GitHub estiver conectado, adicionar:
+
+MODO AUTOMÁTICO: ON/OFF
+
+Quando estiver ON:
+
+ALTERAÇÃO NO PROJETO
+↓
+ANALISAR
+↓
+VALIDAR
+↓
+SINCRONIZAR
+↓
+COMMIT
+↓
+GITHUB ACTIONS
+↓
+BUILD
+↓
+TESTE
+↓
+VALIDAÇÃO
+
+---
+
+10. COMMIT AUTOMÁTICO
+
+Criar mensagens automáticas.
+
+Exemplos:
+
+feat: update game project
+fix: repair android build
+build: update apk pipeline
+feat: add game system
+fix: resolve compilation error
+
+Mostrar antes do commit:
+
+ALTERAÇÕES DETECTADAS
+
+Arquivos:
+12 modificados
+3 novos
+
+Mensagem:
+feat: update game project
+
+[ CANCELAR ]
+[ CONFIRMAR ]
+
+No modo automático, alterações classificadas como seguras poderão ser confirmadas automaticamente.
+
+---
+
+11. BUILD AUTOMÁTICO
+
+Após sincronização:
+
+COMMIT
+↓
+GITHUB ACTIONS
+↓
+BUILD ANDROID
+
+Acompanhar:
+
+QUEUED
+RUNNING
+TESTING
+VALIDATING
+SUCCESS
+FAILED
+
+---
+
+12. CORREÇÃO AUTOMÁTICA
+
+Se o build falhar:
+
+ERRO
+↓
+CAPTURAR LOG
+↓
+ANALISAR
+↓
+IDENTIFICAR CAUSA
+↓
+GERAR CORREÇÃO
+↓
+VALIDAR CORREÇÃO
+↓
+COMMIT
+↓
+NOVO BUILD
+
+Limitar tentativas automáticas.
+
+MAX_ATTEMPTS = 5
+
+Se não resolver:
+
+AUTO-FIX PARADO
+
+e mostrar o relatório do erro.
+
+---
+
+13. BUILD DE PRODUÇÃO
+
+Adicionar botão:
+
+[ GERAR APK ]
+
+E:
+
+[ GERAR RELEASE ]
+
+GERAR APK
+
+Executar build de teste/produção conforme configuração.
+
+GERAR RELEASE
+
+Executar:
+
+VALIDAÇÃO
+↓
+ASSINATURA
+↓
+BUILD RELEASE
+↓
+TESTE
+↓
+VALIDAÇÃO APK
+↓
+SHA-256
+↓
+ARTEFATO
+
+---
+
+14. ARTEFATOS
+
+Depois do build bem-sucedido, detectar automaticamente:
+
+GameDevStudio.apk
+MasterInstaller.apk
+GameDevStudio.aab
+
+quando disponíveis.
+
+Mostrar:
+
+╔══════════════════════════════════╗
+║ BUILD CONCLUÍDO                  ║
+╠══════════════════════════════════╣
+║ ✓ GameDevStudio.apk              ║
+║ ✓ MasterInstaller.apk            ║
+║ ✓ SHA-256                        ║
+╚══════════════════════════════════╝
+
+[ BAIXAR APK ]
+
+Nunca criar links falsos.
+
+O botão só deve aparecer quando o artefato realmente existir.
+
+---
+
+15. INSTALAÇÃO
+
+Manter o fluxo Android:
+
+GERAR APK
+↓
+DOWNLOAD
+↓
+MASTER INSTALLER
+↓
+SIM / NÃO
+↓
+INSTALADOR OFICIAL ANDROID
+↓
+INSTALAR
+↓
+ABRIR
+
+Nunca tentar ignorar a confirmação de instalação ou mecanismos de segurança do Android.
+
+---
+
+16. BOTÃO "TESTAR CONEXÃO"
+
+Adicionar:
+
+[ TESTAR CONEXÃO ]
+
+Executar:
+
+GitHub acessível?
+✓
+
+Repositório encontrado?
+✓
+
+Permissão de leitura?
+✓
+
+Permissão de escrita?
+✓
+
+GitHub Actions?
+✓
+
+Workflow?
+✓
+
+Build disponível?
+✓
+
+Resultado:
+
+✓ INTEGRAÇÃO PRONTA
+
+ou:
+
+⚠ INTEGRAÇÃO INCOMPLETA
+
+com explicação do que falta.
+
+---
+
+17. SISTEMA DE STATUS
+
+Mostrar permanentemente:
+
+GITHUB        ● ONLINE
+REPOSITÓRIO   ● CONECTADO
+ACTIONS       ● DISPONÍVEL
+BUILD         ● PRONTO
+SYNC          ● SINCRONIZADO
+
+Cores e indicadores devem ser usados somente como elementos visuais de status.
+
+---
+
+18. COMANDO RÁPIDO
+
+Adicionar uma barra de comandos:
+
+Digite um comando...
+
+Comandos:
+
+github conectar
+github testar
+github sincronizar
+github status
+github pull
+github push
+github commit
+github build
+github release
+github logs
+github artifacts
+github rollback
+
+Também aceitar linguagem natural:
+
+Conectar meu projeto ao GitHub
+
+Sincronizar meu projeto
+
+Gerar o APK
+
+Verificar o último erro
+
+Fazer novo build
+
+A IA deve converter a solicitação em ações seguras do sistema.
+
+---
+
+19. IA ORQUESTRADORA
+
+Criar:
+
+GitHub Integration AI
+
+Responsável por interpretar comandos e controlar:
+
+Repository Manager
+Git Manager
+Workflow Manager
+Build Manager
+Test Manager
+Error Manager
+Artifact Manager
+Release Manager
+
+A IA deve explicar o que está fazendo de forma simples.
+
+Exemplo:
+
+Conectado ao repositório.
+
+Estou verificando:
+✓ acesso
+✓ branch
+✓ arquivos
+✓ GitHub Actions
+
+Próximo passo:
+sincronização do projeto.
+
+---
+
+20. MEMÓRIA DA INTEGRAÇÃO
+
+Salvar apenas configurações não sensíveis:
+
+owner
+repository
+branch
+último commit
+último build
+último artefato
+status
+
+Nunca salvar:
+
+senha
+token em texto puro
+chave privada
+segredo de assinatura
+
+---
+
+21. RECUPERAÇÃO
+
+Se a conexão cair:
+
+CONEXÃO PERDIDA
+↓
+TENTAR RECONEXÃO
+↓
+TESTAR
+↓
+CONTINUAR DO ÚLTIMO ESTADO
+
+Não repetir operações que já foram concluídas.
+
+---
+
+22. DASHBOARD
+
+Criar painel:
+
+┌─────────────────────────────────────┐
+│ GITHUB INTEGRATION                  │
+├─────────────────────────────────────┤
+│ ● CONECTADO                         │
+│                                     │
+│ Repositório: gds-mobile-engine-     │
+│ Branch: main                        │
+│                                     │
+│ Sync: ✓                             │
+│ Actions: ✓                          │
+│ Build: ✓                            │
+│                                     │
+│ Último commit: XXXXXXX              │
+│ Último build: SUCCESS               │
+├─────────────────────────────────────┤
+│ [ SINCRONIZAR ]                     │
+│ [ TESTAR ]                          │
+│ [ GERAR APK ]                       │
+│ [ RELEASE ]                         │
+└─────────────────────────────────────┘
+
+---
+
+23. REGRA PRINCIPAL
+
+A barra do GitHub não deve ser apenas um campo para guardar uma URL.
+
+Ela deve ser a porta de entrada do sistema de integração automática.
+
+Fluxo final:
+
+USUÁRIO COLOCA GITHUB
+        ↓
+CONECTAR
+        ↓
+AUTORIZAÇÃO OFICIAL
+        ↓
+VALIDAR
+        ↓
+CONECTAR
+        ↓
+SINCRONIZAR
+        ↓
+COMMIT
+        ↓
+GITHUB ACTIONS
+        ↓
+BUILD REMOTO
+        ↓
+TESTES
+        ↓
+CORREÇÃO AUTOMÁTICA
+        ↓
+NOVO BUILD
+        ↓
+APK
+        ↓
+DOWNLOAD
+        ↓
+MASTER INSTALLER
+        ↓
+INSTALAÇÃO
+
+24. REGRA DE SEGURANÇA ABSOLUTA
+
+O sistema deve automatizar somente operações permitidas pelas autorizações oficiais.
+
+Não tentar:
+
+- burlar autenticação;
+- descobrir senhas;
+- contornar permissões;
+- obter tokens sem autorização;
+- acessar repositórios não autorizados;
+- instalar aplicativos silenciosamente;
+- ignorar segurança do Android.
+
+Toda automação deve permanecer dentro das permissões concedidas pelo proprietário.
+
+RESULTADO ESPERADO
+
+Transformar a área de integração do Game Dev Studio em uma Central GitHub totalmente integrada, na qual o usuário informa o repositório uma vez, autoriza o acesso oficialmente e passa a controlar sincronização, código, build, testes, correções e geração dos APKs pela própria interface do aplicativo.
