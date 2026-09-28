@@ -134,3 +134,310 @@ O objetivo é utilizar a infraestrutura oficial para desenvolvimento, compilaç�
 
 
 quero de permissão 
+
+SISTEMA — GITHUB AUTO CONNECT & PERMISSION SETUP
+
+OBJETIVO
+
+Criar um módulo dentro do Game Dev Studio capaz de analisar automaticamente o projeto, identificar todas as permissões necessárias no GitHub e iniciar o processo oficial de autorização.
+
+O sistema deve reduzir ao mínimo a configuração manual.
+
+---
+
+1. FLUXO PRINCIPAL
+
+Usuário cola:
+
+https://github.com/joaodiasjorge4-pixel/gds-mobile-engine-
+
+↓
+
+O sistema analisa o projeto.
+
+↓
+
+Identifica automaticamente:
+
+• proprietário;
+• repositório;
+• branch principal;
+• estrutura do projeto;
+• arquivos;
+• GitHub Actions;
+• workflows;
+• necessidade de escrita;
+• necessidade de leitura;
+• necessidade de criação de branches;
+• necessidade de commits;
+• necessidade de artifacts;
+• necessidade de releases.
+
+↓
+
+O sistema cria automaticamente um perfil de permissões necessárias.
+
+---
+
+2. GERADOR AUTOMÁTICO DE PERMISSÕES
+
+Criar:
+
+GitHub Permission Analyzer
+
+Ele deve gerar:
+
+PERMISSÕES NECESSÁRIAS
+
+✓ Repository Contents — Read
+✓ Repository Contents — Write
+✓ Metadata — Read
+✓ Actions — Read
+✓ Actions — Write
+✓ Workflows — Read/Write
+✓ Pull Requests — conforme necessidade
+✓ Branches — conforme necessidade
+✓ Releases — conforme necessidade
+
+O sistema deve solicitar somente as permissões realmente necessárias.
+
+---
+
+3. AUTORIZAÇÃO AUTOMÁTICA
+
+Criar botão:
+
+[ AUTORIZAR GITHUB AUTOMATICAMENTE ]
+
+Ao pressionar:
+
+1. O sistema prepara a configuração.
+2. Abre o fluxo oficial de autorização do GitHub.
+3. Apresenta as permissões necessárias.
+4. O usuário confirma uma única vez.
+5. O GitHub fornece a autorização.
+6. O Game Dev Studio retorna automaticamente para a aplicação.
+7. O sistema verifica as permissões recebidas.
+
+O software nunca deve tentar criar privilégios diretamente.
+
+---
+
+4. VERIFICAÇÃO AUTOMÁTICA
+
+Após autorização:
+
+GitHub Permission Test
+
+Executar:
+
+TESTE 01
+Ler repositório
+
+TESTE 02
+Criar branch temporária
+
+TESTE 03
+Criar arquivo temporário
+
+TESTE 04
+Fazer commit
+
+TESTE 05
+Verificar GitHub Actions
+
+TESTE 06
+Executar workflow permitido
+
+TESTE 07
+Ler logs
+
+TESTE 08
+Ler artifacts
+
+TESTE 09
+Excluir recursos temporários criados pelo próprio teste
+
+---
+
+5. SE ALGUMA PERMISSÃO ESTIVER FALTANDO
+
+Não mostrar simplesmente:
+
+"Erro 403".
+
+Mostrar:
+
+╔════════════════════════════════════╗
+║ PERMISSÃO NECESSÁRIA               ║
+╠════════════════════════════════════╣
+║ Operação: Criar arquivo            ║
+║                                    ║
+║ Necessário:                        ║
+║ Contents → Read and Write          ║
+║                                    ║
+║ Status: NÃO AUTORIZADO             ║
+║                                    ║
+║ [ AUTORIZAR ]                      ║
+╚════════════════════════════════════╝
+
+O botão deve abrir diretamente o processo oficial de autorização correspondente.
+
+---
+
+6. MODO "CONFIGURAÇÃO AUTOMÁTICA"
+
+Adicionar:
+
+[CONFIGURAÇÃO AUTOMÁTICA: ON]
+
+Quando ativado:
+
+ANALISAR
+↓
+DETECTAR
+↓
+PREPARAR PERMISSÕES
+↓
+AUTORIZAR
+↓
+VALIDAR
+↓
+TESTAR
+↓
+CONFIGURAR
+↓
+CONECTAR
+
+Se o GitHub exigir confirmação humana, parar somente nesse ponto.
+
+Depois da confirmação, continuar automaticamente.
+
+---
+
+7. CONFIGURAÇÃO DO REPOSITÓRIO
+
+Depois da autorização, o sistema pode preparar automaticamente:
+
+.github/workflows/
+scripts/
+build-system/
+release/
+integration/
+
+Também pode gerar ou atualizar:
+
+android-apk.yml
+
+workflow de testes
+
+workflow de build
+
+workflow de validação
+
+workflow de artifacts
+
+workflow de release
+
+Tudo através das APIs oficiais.
+
+---
+
+8. SISTEMA INTELIGENTE
+
+Criar:
+
+GitHub Integration AI
+
+Responsabilidades:
+
+• analisar erros;
+• identificar permissões;
+• interpretar respostas do GitHub;
+• detectar 401;
+• detectar 403;
+• detectar 404;
+• detectar conflitos;
+• identificar branch;
+• identificar workflow;
+• identificar falhas de build;
+• sugerir correções;
+• executar operações autorizadas.
+
+---
+
+9. REGRA ESPECIAL PARA 403
+
+Quando receber:
+
+403 Resource not accessible by integration
+
+o sistema deve:
+
+1. identificar a operação bloqueada;
+2. identificar a permissão necessária;
+3. verificar se a instalação possui essa permissão;
+4. verificar se o repositório está autorizado;
+5. iniciar o fluxo oficial de reautorização;
+6. testar novamente;
+7. somente continuar quando a operação funcionar.
+
+Não fazer tentativas infinitas.
+
+---
+
+10. SEGURANÇA
+
+O sistema NÃO pode:
+
+• burlar o GitHub;
+• quebrar autenticação;
+• falsificar permissões;
+• roubar tokens;
+• solicitar senha;
+• utilizar credenciais escondidas;
+• modificar permissões sem autorização;
+• acessar repositórios não autorizados.
+
+O sistema pode automatizar tudo que a autorização oficial permitir.
+
+---
+
+11. RESULTADO
+
+O usuário só precisa:
+
+1. Abrir Game Dev Studio.
+2. Entrar em GitHub.
+3. Colar o endereço do repositório.
+4. Pressionar:
+
+[AUTORIZAR E CONFIGURAR AUTOMATICAMENTE]
+
+5. Confirmar a autorização oficial do GitHub.
+
+Depois disso:
+
+AUTORIZAÇÃO
+↓
+ANÁLISE
+↓
+CONFIGURAÇÃO
+↓
+TESTE
+↓
+SINCRONIZAÇÃO
+↓
+COMMIT
+↓
+GITHUB ACTIONS
+↓
+BUILD
+↓
+TESTE
+↓
+APK/AAB
+↓
+DOWNLOAD
+
+O sistema deve fazer automaticamente todas as etapas que o GitHub permitir.
